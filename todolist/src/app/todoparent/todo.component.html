@@ -1,0 +1,52 @@
+<div [hidden]="submitted">
+    <h3>Create a new To-Do List</h3>
+     <form (ngSubmit)="onSubmit()" #todo="ngForm">
+        <div class="form-group">
+         <label for="taskName"> Task Name</label>
+                  <input type="text" class="form-control" id="taskname"
+                         required
+                         [(ngModel)]="model.taskName" name="taskName"
+                         #taskName="ngModel">
+            <div *ngIf="taskName.invalid && (taskName.dirty || taskName.touched)"
+                           class="alert alert-danger">
+                         <div *ngIf="taskName.errors.required">
+                          Task Name is required
+                         </div>
+            </div>
+         </div>
+           
+         <div class="form-group">
+             <label for="StartDate">Start Date</label>
+                  <input type="date" class="form-control" id="StartDate"
+                        required [(ngModel)]="model.StartDate" name="StartDate">
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date</label>
+                 <input type="date" class="form-control" id="endDate"
+                      required  [(ngModel)]="model.endDate" name="endDate">
+       </div>
+           
+        <div class="form-group">
+             <label for="priority">Priority</label>
+                  <select class="form-control" id="priority"
+                          required
+                          [(ngModel)]="model.priority" name="priority"
+                          #priority="ngModel">
+                    <option *ngFor="let pow of priority" [value]="pow">{{pow}}</option>
+                  </select>
+                 <div [hidden]="priority.valid || priority.pristine" class="alert alert-danger">
+                    priority is required
+                  </div>
+        </div>
+                <br>
+                <br>
+           
+              <span><button type="submit" class="btn btn-success" [disabled]="!todo.valid">Submit</button></span>  
+                <button type="button" class="btn btn-default" (click)="newTask(); todo.reset()">Task</button>
+         </form>
+      </div>
+           
+            
+              
+            
+    
